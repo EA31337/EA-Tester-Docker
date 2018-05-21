@@ -1,0 +1,37 @@
+language: generic
+sudo: required
+services:
+  - docker
+env:
+  global:
+  - |
+    IMAGE_ORG=ea31337
+    IMAGE_NAME=fx-mt-vm
+    DOCKER_REPO=$IMAGE_ORG/$IMAGE_NAME
+    CWD="$TRAVIS_BUILD_DIR"
+    DC_RUN="docker run $DOCKER_REPO"
+    DOCKER_TAR=$HOME/.docker/images.tar.gz
+  - secure: "yH/TYN8vfNpBXiNS56lxXtC+a+hLVF5oDBjj0gjQhOmMTbY4N8eHIlwKXnxNHsVwzoFD75xS+hRnZp6xWoDlAbiSNiGQdzzX0ZCIOb24KSsx+l2cCYfOU93cHpwpo+e5XQU+7+txCBZe34pS22x1yCgF5FFsojqiB0HLFQT8+dINrxmNxpKSs6HyVrerPuQ+zy+JRRqNPqkhjGKIxGx2C4+Exr6LMbHQqHx4KGVUIxjXusinzpPDAjNirdZupGdz1TbbzmiAAgE93KtRBa0UWsaKg+BOpSbfhBuI7bDlLoRVx+zENVQfvKz8Oaz3I2ZHMHE6yb4k0dLUdsVDZsi3M2w9RA+6AMO+STIa+rLYNweiPRMZxdOGmpuvBbdiTJP/Ug/ugzhIDW4r1a3ritmuOsheN9Jx8TVnkx8HEn+TOfNxG/BE7DacLX+XePX85NGg+afWH735I+sMbYvJTfQh63DICxSzFXkAdQrZ8BMfqT372Ok1RuBDPgKZSKn/C4fZfV/pt5afrjf14DyPHZnWiZ3z9POj6Thev+kjfFN/gjNmL8GXigWMd+gJ9BsMT/b1Pdz9JXxrIzfsiLy9G9AWeIsqFZmWAYZqJ29ytsLFetTrf2jwMTQCWdnSRV2XQrhv8/um80FKYw+yLNdEMS8V8yiORZ50BtMBTcAI9kGOOKM="
+matrix:
+  fast_finish: true
+cache:
+  apt: true
+  pip: true
+  directories:
+  - $HOME/.docker
+notifications:
+  email:
+    on_success: change
+    on_failure: always
+    on_start: never
+before_script:
+- if [[ -f "$DOCKER_TAR" ]]; then gzip -dc "$DOCKER_TAR" | docker load; fi
+- if [[ -z "$DOCKER_PASSWORD" ]]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD; fi
+script:
+- docker build .
+- docker tag $IMAGE_NAME $DOCKER_REPO:$TRAVIS_BRANCH
+- docker push
+after_script:
+- docker save $IMAGE_NAME | gzip > "$DOCKER_TAR"
+after_success:
+after_failure:
