@@ -10,8 +10,11 @@ env:
     DOCKER_REPO=$IMAGE_ORG/$IMAGE_NAME
     CWD="$TRAVIS_BUILD_DIR"
     DC_RUN="docker run $DOCKER_REPO"
+    DOCKER_TAG=$TRAVIS_BRANCH
     DOCKER_TAR=$HOME/.docker/images.tar.gz
-  - secure: "yH/TYN8vfNpBXiNS56lxXtC+a+hLVF5oDBjj0gjQhOmMTbY4N8eHIlwKXnxNHsVwzoFD75xS+hRnZp6xWoDlAbiSNiGQdzzX0ZCIOb24KSsx+l2cCYfOU93cHpwpo+e5XQU+7+txCBZe34pS22x1yCgF5FFsojqiB0HLFQT8+dINrxmNxpKSs6HyVrerPuQ+zy+JRRqNPqkhjGKIxGx2C4+Exr6LMbHQqHx4KGVUIxjXusinzpPDAjNirdZupGdz1TbbzmiAAgE93KtRBa0UWsaKg+BOpSbfhBuI7bDlLoRVx+zENVQfvKz8Oaz3I2ZHMHE6yb4k0dLUdsVDZsi3M2w9RA+6AMO+STIa+rLYNweiPRMZxdOGmpuvBbdiTJP/Ug/ugzhIDW4r1a3ritmuOsheN9Jx8TVnkx8HEn+TOfNxG/BE7DacLX+XePX85NGg+afWH735I+sMbYvJTfQh63DICxSzFXkAdQrZ8BMfqT372Ok1RuBDPgKZSKn/C4fZfV/pt5afrjf14DyPHZnWiZ3z9POj6Thev+kjfFN/gjNmL8GXigWMd+gJ9BsMT/b1Pdz9JXxrIzfsiLy9G9AWeIsqFZmWAYZqJ29ytsLFetTrf2jwMTQCWdnSRV2XQrhv8/um80FKYw+yLNdEMS8V8yiORZ50BtMBTcAI9kGOOKM="
+    BUILD_DATE="$(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+  - secure: "Zn+lcaiDlnJ724HEKyTRykvlGVAVDzOz/vhoTFeaHR/j2dNiKQq7/nuC9NvFeF6OP8MZZ1CbO55zgJdKu0z//1U88kB8XF1aztt2KPr+07OgSmXd4aqalCK0wJxnwHBLz8xXc9WE4sjyA+gWg+fpUIrbolRb8DmWbWpTkmdccPQ8AtuOAlP38htUkcjGCuGh5syIkGJKc/gFvz4f6cGDl4s8VRawb5K7iHl471im5DCHItlcCBBL1FRAdcuXyH++B5PEl6ElJ8MoX0pgcbY0puMNG/tBsdsBSZt1Gy5vHTcPPhsWR7kLMJExriscOt8uIthansxVX0uk69+Ys3If1OfXiRmJKECHrVjS0foYlHUcK13YDUpnsR3oBGT+wnDxk0hF2M+8vhFW0FQV9Wj+jYAhPP+aH6HZ9xOAiJ6Ebxbh7XDApa9Z3XwxAzdAzEfE3LlTcAtJg1IWl5FPGoitpbAZldpXtowMoUS7Vls8mfLwC0XHV1PGOBllA5s/25mYP1vWVgHFOYokl/kSW7C7OwdBLjuhx8ygrmN4RuAca/DZwsrSYWEnbJbsiOR45bz/FJT054X5s54877jF1j9csjt4dg77ZieBSn91qI+l3iIt15jwdpY+1TY6G/ZB/ASxtwMPXBlRkcKVCRFvM1XFGqBzQ1Kj7f2k8HRchFXxryw="
+  - secure: "LvishmMlID12WHbk7Y8mhJ19TXIrXu1hxIfuDojbVD1HIfzLOho1YKkG+1mo4Abu0TZPNRzJmUfGmbr5fAK4eSE9QDe3blFSLc4qklL4bO5hhfaR+yu5JRzVlJEKxUipDfaok+y1OjH700d1RuyhI0g9c5sXVg0Yv4ZtA103VyJQidsj4S6mdPSZUph8F62xRqn5O8DC5xuypTjbiXcdoPt2fud448dAgZZfB1ltDSkvFd9JQ0HRlytZR4gnwuadkS8mQN/DI27oxgYNxI+1yG4JNBDhGrNknNe4lcNo8qG8MWUMk+XNtY/BBf9GB3DQyHL5dNE7Elex4oeLAlzzDQnEw1EGU0P7a5K75eXT9W0ysrpLK5yl9Zvy4fxyHSU8B83kPp5y1BMnrqTmICEFFhyWOxzxD1C0OELBtN4U6nGAwzC2AwnqeyWeVpT7TI9kI6EAXUkTubUNQGKUTf5fVE8OinO8djLFio4bKKwo4SMzMzDIaEbheAhTUPF5/4Wc9IHgeJ6opsunSXCbnHb87+TFB6s//exMcFO90X8lAhDA0Dv1fSODBGRskYIGAeGcuKee/7dxVwXroGvNHuafQRktWf5NSHukBJ+yD0NxhR30DQEk+zfFK//jiMEM8sdb4Sh57s3UsYKDFkAVKA0febuTFvN8iYBu0EDmAX91gyM="
 matrix:
   fast_finish: true
 cache:
@@ -27,11 +30,13 @@ notifications:
 before_script:
 - if [[ -f "$DOCKER_TAR" ]]; then gzip -dc "$DOCKER_TAR" | docker load; fi
 - if [[ -z "$DOCKER_PASSWORD" ]]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD; fi
+- docker images
 script:
-- docker build .
-- docker tag $IMAGE_NAME $DOCKER_REPO:$TRAVIS_BRANCH
-- docker push
+- docker build --tag $IMAGE_NAME:$DOCKER_TAG --build-arg BUILD_DATE=$BUILD_DATE --build-arg VCS_REF=$TRAVIS_COMMIT --build-arg VERSION=$TRAVIS_BRANCH .
+- docker tag $IMAGE_NAME:$DOCKER_TAG $DOCKER_REPO:$DOCKER_TAG
+- docker push $DOCKER_REPO:$DOCKER_TAG
 after_script:
+- docker images
 - docker save $IMAGE_NAME | gzip > "$DOCKER_TAR"
 after_success:
 after_failure:
