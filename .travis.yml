@@ -29,7 +29,7 @@ notifications:
     on_start: never
 before_script:
 - if [[ -f "$DOCKER_TAR" ]]; then gzip -dc "$DOCKER_TAR" | docker load; fi
-- if [[ -z "$DOCKER_PASSWORD" ]]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD; fi
+- if [[ "$DOCKER_PASSWORD" ]]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD; fi
 - docker images
 script:
 - docker build --tag $IMAGE_NAME:$DOCKER_TAG --build-arg BUILD_DATE=$BUILD_DATE --build-arg VCS_REF=$TRAVIS_COMMIT --build-arg VERSION=$TRAVIS_BRANCH .
