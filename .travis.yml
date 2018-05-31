@@ -34,9 +34,9 @@ before_script:
 script:
 - docker build --tag $IMAGE_NAME:$DOCKER_TAG --build-arg BUILD_DATE=$BUILD_DATE --build-arg VCS_REF=$TRAVIS_COMMIT --build-arg VERSION=$TRAVIS_BRANCH .
 - docker tag $IMAGE_NAME:$DOCKER_TAG $DOCKER_REPO:$DOCKER_TAG
-- docker push $DOCKER_REPO:$DOCKER_TAG
 after_script:
 - docker images
+- if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then docker push $DOCKER_REPO:$DOCKER_TAG; fi
 - docker save $IMAGE_NAME | gzip > "$DOCKER_TAR"
 after_success:
 after_failure:
