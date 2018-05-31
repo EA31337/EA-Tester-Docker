@@ -14,8 +14,8 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.schema-version="1.0"
 
 # Input.
-ENV BT_YEARS ${BT_YEARS:-2007}
-ENV BT_SYMBOL ${BT_SYMBOL:-EURUSD}
+ENV BT_YEARS $BT_YEARS
+ENV BT_SYMBOL $BT_SYMBOL
 
 # Download backtest data.
 RUN eval.sh get_bt_data $BT_SYMBOL $BT_YEARS DS
