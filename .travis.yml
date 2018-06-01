@@ -37,7 +37,7 @@ before_script:
 - if [[ "$DOCKER_PASSWORD" ]]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD; fi
 - docker images
 script:
-- docker build --tag $IMAGE_NAME:$DOCKER_TAG --build-arg BT_YEARS=$BT_YEARS --build-arg BT_SYMBOL=$BT_SYMBOL --build-arg BUILD_DATE=$BUILD_DATE --build-arg VCS_REF=$TRAVIS_COMMIT --build-arg VERSION=$TRAVIS_BRANCH .
+- docker build --tag "$IMAGE_NAME:$DOCKER_TAG" --build-arg "BT_YEARS=$BT_YEARS" --build-arg "BT_SYMBOL=$BT_SYMBOL" --build-arg "BUILD_DATE=$BUILD_DATE" --build-arg "VCS_REF=$TRAVIS_COMMIT" --build-arg "VERSION=$TRAVIS_BRANCH" .
 - docker tag $IMAGE_NAME:$DOCKER_TAG $DOCKER_REPO:$DOCKER_TAG
 after_script:
 - docker images
