@@ -1,5 +1,5 @@
-# Set the base image to FX-MT-VM
-FROM ea31337/fx-mt-vm:docker-fixes
+# Set the base image to EA-Tester
+FROM ea31337/ea-tester
 MAINTAINER kenorb
 
 # Build-time metadata as defined at http://label-schema.org
@@ -8,7 +8,7 @@ ARG VCS_REF
 ARG VERSION
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/EA31337/FX-MT-VM-Docker" \
+      org.label-schema.vcs-url="https://github.com/EA31337/EA-Tester-Docker" \
       org.label-schema.vendor="FX31337" \
       org.label-schema.version=$VERSION \
       org.label-schema.schema-version="1.0"

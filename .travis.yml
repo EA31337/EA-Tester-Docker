@@ -6,7 +6,7 @@ env:
   global:
   - |
     IMAGE_ORG=ea31337
-    IMAGE_NAME=fx-mt-vm
+    IMAGE_NAME=ea-tester
     DOCKER_REPO=$IMAGE_ORG/$IMAGE_NAME
     CWD="$TRAVIS_BUILD_DIR"
     DC_RUN="docker run $DOCKER_REPO"
