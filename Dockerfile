@@ -1,5 +1,5 @@
 # Set the base image to EA-Tester
-FROM ea31337/ea-tester
+FROM ea31337/ea-tester:dev
 MAINTAINER kenorb
 
 # Build-time metadata as defined at http://label-schema.org
