@@ -26,4 +26,4 @@ ENV BT_SYMBOL $BT_SYMBOL
 RUN echo 2: $BT_YEARS
 
 # Download backtest data.
-RUN eval.sh get_bt_data $BT_SYMBOL $BT_YEARS DS M1
+RUN eval.sh bt_data_get $BT_SYMBOL $BT_YEARS DS M1
