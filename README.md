@@ -16,6 +16,7 @@
 | AUDCAD-2015-DS      | [![Build Status](https://api.travis-ci.org/EA31337/EA-Tester-Docker.svg?branch=AUDCAD-2015-DS)](https://travis-ci.org/EA31337/EA-Tester-Docker/branches) |
 | AUDCAD-2016-DS      | [![Build Status](https://api.travis-ci.org/EA31337/EA-Tester-Docker.svg?branch=AUDCAD-2016-DS)](https://travis-ci.org/EA31337/EA-Tester-Docker/branches) |
 | AUDCAD-2017-DS      | [![Build Status](https://api.travis-ci.org/EA31337/EA-Tester-Docker.svg?branch=AUDCAD-2017-DS)](https://travis-ci.org/EA31337/EA-Tester-Docker/branches) |
+| AUDUSD-2018-DS      | [![Build Status](https://api.travis-ci.org/EA31337/EA-Tester-Docker.svg?branch=AUDUSD-2018-DS)](https://travis-ci.org/EA31337/EA-Tester-Docker/branches) |
 | EURUSD-2007-DS      | [![Build Status](https://api.travis-ci.org/EA31337/EA-Tester-Docker.svg?branch=EURUSD-2007-DS)](https://travis-ci.org/EA31337/EA-Tester-Docker/branches) |
 | EURUSD-2008-DS      | [![Build Status](https://api.travis-ci.org/EA31337/EA-Tester-Docker.svg?branch=EURUSD-2008-DS)](https://travis-ci.org/EA31337/EA-Tester-Docker/branches) |
 | EURUSD-2009-DS      | [![Build Status](https://api.travis-ci.org/EA31337/EA-Tester-Docker.svg?branch=EURUSD-2009-DS)](https://travis-ci.org/EA31337/EA-Tester-Docker/branches) |
@@ -30,3 +31,7 @@
 | EURUSD-2015-DS      | [![Build Status](https://api.travis-ci.org/EA31337/EA-Tester-Docker.svg?branch=EURUSD-2015-DS)](https://travis-ci.org/EA31337/EA-Tester-Docker/branches) |
 | EURUSD-2016-DS      | [![Build Status](https://api.travis-ci.org/EA31337/EA-Tester-Docker.svg?branch=EURUSD-2016-DS)](https://travis-ci.org/EA31337/EA-Tester-Docker/branches) |
 | EURUSD-2017-DS      | [![Build Status](https://api.travis-ci.org/EA31337/EA-Tester-Docker.svg?branch=EURUSD-2017-DS)](https://travis-ci.org/EA31337/EA-Tester-Docker/branches) |
+| GBPUSD-2018-DS      | [![Build Status](https://api.travis-ci.org/EA31337/EA-Tester-Docker.svg?branch=GBPUSD-2018-DS)](https://travis-ci.org/EA31337/EA-Tester-Docker/branches) |
+| USDCAD-2018-DS      | [![Build Status](https://api.travis-ci.org/EA31337/EA-Tester-Docker.svg?branch=USDCAD-2018-DS)](https://travis-ci.org/EA31337/EA-Tester-Docker/branches) |
+| USDCHF-2018-DS      | [![Build Status](https://api.travis-ci.org/EA31337/EA-Tester-Docker.svg?branch=USDCHF-2018-DS)](https://travis-ci.org/EA31337/EA-Tester-Docker/branches) |
+| USDJPY-2018-DS      | [![Build Status](https://api.travis-ci.org/EA31337/EA-Tester-Docker.svg?branch=USDJPY-2018-DS)](https://travis-ci.org/EA31337/EA-Tester-Docker/branches) |
