@@ -7,8 +7,6 @@ env:
   - BOOT_CMD=${BOOT_CMD:-id}
   - BUILD_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
   - CWD="$TRAVIS_BUILD_DIR"
-  - BT_SYMBOL="$(echo $TRAVIS_BRANCH | grep -o '^[^-]\+')"
-  - BT_YEARS="$(echo $TRAVIS_BRANCH | grep -o '[1-9]\+[^A-Z]\+' | grep -o '[1-9].*[0-9]')"
   - IMAGE_ORG=ea31337
   - IMAGE_NAME=ea-tester
   - DOCKER_REPO=$IMAGE_ORG/$IMAGE_NAME
@@ -37,6 +35,8 @@ before_script:
 - if [[ "$DOCKER_PASSWORD" ]]; then docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD; fi
 - docker images
 - test -n "$BOOT_CMD" && eval "$BOOT_CMD"
+- export BT_SYMBOL="$(echo $TRAVIS_BRANCH | grep -o '^[^-]\+')"
+- export BT_YEARS="$(echo $TRAVIS_BRANCH | grep -o '[1-9]\+[^A-Z]\+' | grep -o '[1-9].*[0-9]')"
 script:
 - docker build --tag "$IMAGE_NAME:$DOCKER_TAG" --build-arg "BT_YEARS=$BT_YEARS" --build-arg "BT_SYMBOL=$BT_SYMBOL" --build-arg "BUILD_DATE=$BUILD_DATE" --build-arg "VCS_REF=$TRAVIS_COMMIT" --build-arg "VERSION=$TRAVIS_BRANCH" .
 - docker tag $IMAGE_NAME:$DOCKER_TAG $DOCKER_REPO:$DOCKER_TAG
